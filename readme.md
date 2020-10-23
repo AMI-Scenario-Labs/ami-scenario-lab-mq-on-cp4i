@@ -38,7 +38,7 @@
    ![Define channel auth](img/definechannel.png)
    ![Channel Auth defined](img/channelauthcreated.png)
 
-# Testing MQ
+# Testing MQ in Cluster
 
 MQ has been deployed within the Cloud Pak for Integration to other containers deployed within the same Cluster. This deployment is NOT accessible externally. Depending on your scenario you can connect ACE / API Connect / Event Streams etc to MQ using the deployed service. This acts as an entry point into MQ within the Kubernetes Cluster. Assuming you used the defaults within the deployment the hostname will be _quickstart-cp4i-ibm-mq_. To verify the installation we will use an MQ client sample within the deployment.
 
@@ -57,3 +57,11 @@ MQ has been deployed within the Cloud Pak for Integration to other containers de
    ![Select app1](img/selectapp1.png)
 1. You will then see the message sent:  
    ![View message](img/viewmessage.png)
+
+# Testing MQ Remotely
+
+IBM offers Developer Images for our Integration Capabilities on DockerHub. In this portion, we will use the container to do the same test as we did above inside the cluster but using the utilities that are apart of the container. 
+
+1. Let's start by pulling down the container from DockerHub.  This assumes that you have Docker Desktop installed and it is enabled for **Linux Images**. Here is the command below to run on your **Terminal** or **Command Prompt**. 
+
+    docker pull ibm-mq:latest
