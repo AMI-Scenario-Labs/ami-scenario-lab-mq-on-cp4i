@@ -64,7 +64,7 @@ IBM offers Developer Images for our Integration Capabilities on DockerHub. In th
 
 1. Let's start by pulling down the container from DockerHub. This assumes that you have Docker Desktop installed and it is enabled for **Linux Images**. Here is the command below to run on your **Terminal** or **Command Prompt**.
 
-   docker pull ibm-mq:latest
+   docker pull ibmcom/mq:latest
 
 1. Download your certs folder or navigate to the folder where your certs, ccdt file and key files exist. We need to update some information in the CCDT file.
 
