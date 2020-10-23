@@ -60,8 +60,34 @@ MQ has been deployed within the Cloud Pak for Integration to other containers de
 
 # Testing MQ Remotely
 
-IBM offers Developer Images for our Integration Capabilities on DockerHub. In this portion, we will use the container to do the same test as we did above inside the cluster but using the utilities that are apart of the container. 
+IBM offers Developer Images for our Integration Capabilities on DockerHub. In this portion, we will use the container to do the same test as we did above inside the cluster but using the utilities that are apart of the container.
 
-1. Let's start by pulling down the container from DockerHub.  This assumes that you have Docker Desktop installed and it is enabled for **Linux Images**. Here is the command below to run on your **Terminal** or **Command Prompt**. 
+1. Let's start by pulling down the container from DockerHub. This assumes that you have Docker Desktop installed and it is enabled for **Linux Images**. Here is the command below to run on your **Terminal** or **Command Prompt**.
 
-    docker pull ibm-mq:latest
+   docker pull ibm-mq:latest
+
+1. Download your certs folder or navigate to the folder where your certs, ccdt file and key files exist. We need to update some information in the CCDT file.
+
+   ![Update CCDT](img/ccdt-update.png)
+
+1. In order to get the correct external route to update, browse to your OpenShift Console and to to the **Routes** Namespace under **Networking**
+
+   ![External Route](img/external-mq-route.png)
+
+1. We need to make a container image off the ibm-mq image that binds your key and ccdt info inside. Run the command below:
+
+   docker run --rm --detach -e LICENSE=accept --volume [absolute-path-to-folder-for-certs]/certs-callum:/mnt/usr/ -u root:root -e MQSSLKEYR=/mnt/usr/key -e MQCCDTURL=file:///mnt/usr/ccdt.json ibmcom/mq
+
+1. This command should return an ID number.. We now need to use the **Container ID** or **Container Name** to be able to exec into this container and run the same utility.
+
+   ![External Route](img/external-mq-route.png)
+
+1. Now let's exec into the container running the same command we did in the cluster.
+
+   ![External Route](img/docker-names.png)
+
+1. Let's now run the command to connect to the external instance.
+
+   docker exec -ti [CONTAINER-NAME_OR_CONTAINER-ID] /opt/mqm/samp/bin/amqsputc APPQ QUICKSTART
+
+Connections should work as before when we tested. Please pull up QueueManager Web Dashboard to verify messages were received.
