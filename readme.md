@@ -64,7 +64,9 @@ IBM offers Developer Images for our Integration Capabilities on DockerHub. In th
 
 1. Let's start by pulling down the container from DockerHub. This assumes that you have Docker Desktop installed and it is enabled for **Linux Images**. Here is the command below to run on your **Terminal** or **Command Prompt**.
 
+```
    docker pull ibmcom/mq:latest
+```
 
 1. Download your certs folder or navigate to the folder where your certs, ccdt file and key files exist. We need to update some information in the CCDT file.
 
@@ -84,7 +86,9 @@ IBM offers Developer Images for our Integration Capabilities on DockerHub. In th
 
 1. This command above should return an ID number.. To verify that it was created and is running, we need to run the following command:
 
-`docker ps`
+   ```
+   docker ps
+   ```
 
 1. You should see an output like below. This container is using the ccdt.json file plus the key files that we binded to it. We can now get a terminal to the container and run our commands to use the sample program to open a connection to the Queue Manager and run commands.
 
@@ -92,6 +96,8 @@ IBM offers Developer Images for our Integration Capabilities on DockerHub. In th
 
 1. Let's now run the command to connect to the external instance.
 
+```
    docker exec -ti [CONTAINER-NAME_OR_CONTAINER-ID] /opt/mqm/samp/bin/amqsputc APPQ QUICKSTART
+```
 
 Connections should work as before when we tested. Please pull up QueueManager Web Dashboard to verify messages were received.
