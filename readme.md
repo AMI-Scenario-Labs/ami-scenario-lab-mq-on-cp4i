@@ -104,5 +104,20 @@ IBM offers Developer Images for our Integration Capabilities on DockerHub. In th
    docker exec -ti [CONTAINER-NAME_OR_CONTAINER-ID] /opt/mqm/samp/bin/amqsputc APPQ QUICKSTART
 ```
 
-\*\*
-Connections should work as before when we tested. Please pull up QueueManager Web Dashboard to verify messages were received.
+**Using the Container Name**
+
+```
+   docker exec -ti tender_thompson /opt/mqm/samp/bin/amqsputc APPQ QUICKSTART
+```
+
+**Using the Container ID**
+
+```
+   docker exec -ti [911c] /opt/mqm/samp/bin/amqsputc APPQ QUICKSTART
+```
+
+Connections should work as before when we tested. Enter a line of text and press **[ENTER]** key. Every line is a new message. Pressing **[ENTER]** twice in a row will close the connection.
+
+![External Route](img/ampq-connection.png)
+
+Please pull up QueueManager Web Dashboard to verify messages were received.
