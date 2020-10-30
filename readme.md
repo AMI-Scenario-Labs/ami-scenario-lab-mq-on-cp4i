@@ -82,7 +82,11 @@ IBM offers Developer Images for our Integration Capabilities on DockerHub. In th
    docker run --rm --detach -e LICENSE=accept --volume=[absolute-path-to-folder-for-certs]:/mnt/usr/ -u root:root -e MQSSLKEYR=/mnt/usr/key -e MQCCDTURL=file:///mnt/usr/ccdt.json ibmcom/mq
    ```
 
-   **for example** I downloaded the customer.zip file to my Downloads folder on my Windows Computer. My path will be the following to create the container.
+   **FOR WINDOWS: Here is Example** I downloaded the customer.zip file to my Downloads folder on my Windows Computer. My path will be the following to create the container.
+
+   ```
+   docker run --rm --detach -e LICENSE=accept --volume=D:\Workspace-Images\customer:/mnt/usr/ -u root:root -e MQSSLKEYR=/mnt/usr/key -e MQCCDTURL=file:///mnt/usr/ccdt.json ibmcom/mq
+   ```
 
 1. This command above should return an ID number.. To verify that it was created and is running, we need to run the following command:
 
@@ -100,4 +104,5 @@ IBM offers Developer Images for our Integration Capabilities on DockerHub. In th
    docker exec -ti [CONTAINER-NAME_OR_CONTAINER-ID] /opt/mqm/samp/bin/amqsputc APPQ QUICKSTART
 ```
 
+\*\*
 Connections should work as before when we tested. Please pull up QueueManager Web Dashboard to verify messages were received.
