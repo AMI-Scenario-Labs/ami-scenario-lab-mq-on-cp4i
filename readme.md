@@ -60,7 +60,7 @@ MQ has been deployed within the Cloud Pak for Integration to other containers de
 
 # Testing MQ Remotely
 
-IBM offers Developer Images for our Integration Capabilities on DockerHub. In this portion, we will use the container to do the same test as we did above inside the cluster but using the utilities that are apart of the container.
+IBM offers Developer Images for our Integration Capabilities on DockerHub. In this portion, we will use the MQ Developer Container to do the same test as we did above inside the cluster but using the utilities that are apart of that container. There are other ways to connect remotely to the cluster like with **MQ Explorer**, **MQ Client Libraries**, **REST API**, or any application libraries available. If you already have the **MQI** Libraries available locally, you may not need to do this process. Using the container is the easiest way to use the MQI Libraries inside the container which does not involve installing anything else on your machine. This is one of the great conveniences of using containers.
 
 1. Let's start by pulling down the container from DockerHub. This assumes that you have Docker Desktop installed and it is enabled for **Linux Images**. Here is the command below to run on your **Terminal** or **Command Prompt**.
 
@@ -76,15 +76,19 @@ IBM offers Developer Images for our Integration Capabilities on DockerHub. In th
 
 1. We need to make a container image off the ibm-mq image that binds your key and ccdt info inside. Run the command below:
 
-   docker run --rm --detach -e LICENSE=accept --volume [absolute-path-to-folder-for-certs]/certs-callum:/mnt/usr/ -u root:root -e MQSSLKEYR=/mnt/usr/key -e MQCCDTURL=file:///mnt/usr/ccdt.json ibmcom/mq
+   ```
+   docker run --rm --detach -e LICENSE=accept --volume=[absolute-path-to-folder-for-certs]:/mnt/usr/ -u root:root -e MQSSLKEYR=/mnt/usr/key -e MQCCDTURL=file:///mnt/usr/ccdt.json ibmcom/mq
+   ```
 
-1. This command should return an ID number.. We now need to use the **Container ID** or **Container Name** to be able to exec into this container and run the same utility.
+   **for example** I downloaded the customer.zip file to my Downloads folder on my Windows Computer. My path will be the following to create the container.
 
-   ![External Route](img/external-mq-route.png)
+1. This command above should return an ID number.. To verify that it was created and is running, we need to run the following command:
 
-1. Now let's exec into the container running the same command we did in the cluster.
+`docker ps`
 
-   ![External Route](img/docker-names.png)
+1. You should see an output like below. This container is using the ccdt.json file plus the key files that we binded to it. We can now get a terminal to the container and run our commands to use the sample program to open a connection to the Queue Manager and run commands.
+
+![External Route](img/docker-names.png)
 
 1. Let's now run the command to connect to the external instance.
 
